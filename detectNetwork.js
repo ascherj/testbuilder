@@ -26,6 +26,8 @@ var detectNetwork = function(cardNumber) {
   var isMasterCard = (cardLength === 16 && firstTwoDigits >= 51 && firstTwoDigits <= 55);
   var isDiscover = (cardLength === 16 || cardLength === 19) &&
                    (firstFourDigits === 6011 || (firstThreeDigits >= 644 && firstThreeDigits <= 649) || firstTwoDigits === 65);
+  var isMaestro = (cardLength >= 12 && cardLength <= 19) &&
+                  (firstFourDigits === 5018 || firstFourDigits === 5020 || firstFourDigits === 5038 || firstFourDigits === 6304);
 
   if (isDinersClub) {
     return 'Diner\'s Club';
@@ -37,5 +39,7 @@ var detectNetwork = function(cardNumber) {
     return 'MasterCard';
   } else if (isDiscover) {
     return 'Discover';
+  } else if (isMaestro) {
+    return 'Maestro';
   }
 };
