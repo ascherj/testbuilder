@@ -47,7 +47,7 @@ var generateSampleCardNumber = function(prefix, length) {
   while (sampleCardNumber.toString().length < length) {
     sampleCardNumber = sampleCardNumber.toString() + '0';
   }
-  return Number(sampleCardNumber);
+  return sampleCardNumber;
 };
 
 describe('Diner\'s Club', function() {
@@ -158,40 +158,58 @@ describe('Discover', function() {
   var expect = chai.expect;
 
   it('has a prefix of 6011 and a length of 16', function() {
-    expect(detectNetwork('6011012301230123')).to.equal('Discover');
+    expect(detectNetwork(generateSampleCardNumber(6011, 16))).to.equal('Discover');
   });
 
   it('has a prefix of 6011 and a length of 19', function() {
-    expect(detectNetwork('6011012301230123012')).to.equal('Discover');
-  });
-
-  it('has a prefix of 65 and a length of 16', function() {
-    expect(detectNetwork('6501230123012301')).to.equal('Discover');
-  });
-  
-  it('has a prefix of 65 and a length of 19', function() {
-    expect(detectNetwork('6501230123012301230')).to.equal('Discover');
+    expect(detectNetwork(generateSampleCardNumber(6011, 19))).to.equal('Discover');
   });
 
   for (var prefix = 644; prefix <= 649; prefix++) {
     (function(prefix) {
       it('has a prefix of ' + prefix + ' and a length of 16', function() {
-        var sampleCardNumber = generateSampleCardNumber(prefix, 16);
-        expect(detectNetwork(sampleCardNumber.toString())).to.equal('Discover');
+        expect(detectNetwork(generateSampleCardNumber(prefix, 16))).to.equal('Discover');
       });
 
       it('has a prefix of ' + prefix + ' and a length of 19', function() {
-        var sampleCardNumber = generateSampleCardNumber(prefix, 19);
-        expect(detectNetwork(sampleCardNumber.toString())).to.equal('Discover');
+        expect(detectNetwork(generateSampleCardNumber(prefix, 19))).to.equal('Discover');
       });
     })(prefix);
   }
 
+  it('has a prefix of 65 and a length of 16', function() {
+    expect(detectNetwork(generateSampleCardNumber(65, 16))).to.equal('Discover');
+  });
+  
+  it('has a prefix of 65 and a length of 19', function() {
+    expect(detectNetwork(generateSampleCardNumber(65, 19))).to.equal('Discover');
+  });
+
 });
 
 describe('Maestro', function() {
-  // Write full test coverage for the Maestro card
+  var expect = chai.expect;
+
+  for (var length = 12; length <= 19; length++) {
+    (function(length) {
+      it('has a prefix of 5018 and a length of ' + length, function() {
+        expect(detectNetwork(generateSampleCardNumber(5018, length))).to.equal('Maestro');
+      });
+
+      it('has a prefix of 5020 and a length of ' + length, function() {
+        expect(detectNetwork(generateSampleCardNumber(5020, length))).to.equal('Maestro');
+      });
+
+      it('has a prefix of 5038 and a length of ' + length, function() {
+        expect(detectNetwork(generateSampleCardNumber(5038, length))).to.equal('Maestro');
+      });
+
+      it('has a prefix of 6304 and a length of ' + length, function() {
+        expect(detectNetwork(generateSampleCardNumber(6304, length))).to.equal('Maestro');
+      });
+    })(length);
+  }
 });
 
-describe('should support China UnionPay')
-describe('should support Switch')
+describe('should support China UnionPay');
+describe('should support Switch');
