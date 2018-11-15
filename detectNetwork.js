@@ -20,10 +20,10 @@ var detectNetwork = function(cardNumber) {
   var firstThreeDigits = Number(cardNumber.slice(0, 3));
   var firstFourDigits = Number(cardNumber.slice(0, 4));
 
-  var isDinersClub = (cardLength === 14 && firstTwoDigits === 38 || firstTwoDigits === 39);
-  var isAmericanExpress = (cardLength === 15 && firstTwoDigits === 34 || firstTwoDigits === 37);
+  var isDinersClub = (cardLength === 14 && (firstTwoDigits === 38 || firstTwoDigits === 39));
+  var isAmericanExpress = (cardLength === 15 && (firstTwoDigits === 34 || firstTwoDigits === 37));
   var isVisa = ((cardLength === 13 || cardLength === 16 || cardLength === 19) && firstDigit === 4);
-  var isMasterCard = (cardLength === 16 && firstTwoDigits >= 51 && firstTwoDigits <= 55);
+  var isMasterCard = (cardLength === 16 && (firstTwoDigits >= 51 && firstTwoDigits <= 55));
   var isDiscover = (cardLength === 16 || cardLength === 19) &&
                    (firstFourDigits === 6011 || (firstThreeDigits >= 644 && firstThreeDigits <= 649) || firstTwoDigits === 65);
   var isMaestro = (cardLength >= 12 && cardLength <= 19) &&
