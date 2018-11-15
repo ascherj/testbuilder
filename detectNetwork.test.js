@@ -41,6 +41,15 @@ var FILL_ME_IN = 'Fill this value in';
 //     }
 //   });
 // });
+
+var generateSampleCardNumber = function(prefix, length) {
+  var sampleCardNumber = prefix;
+  while (sampleCardNumber.toString().length < length) {
+    sampleCardNumber = sampleCardNumber.toString() + '0';
+  }
+  return Number(sampleCardNumber);
+};
+
 describe('Diner\'s Club', function() {
   // Be careful, tests can have bugs too...
 
@@ -151,52 +160,32 @@ describe('Discover', function() {
   it('has a prefix of 6011 and a length of 16', function() {
     assert(detectNetwork('6011012301230123') === 'Discover');
   });
-  it('has a prefix of 644 and a length of 16', function() {
-    assert(detectNetwork('6440123012301230') === 'Discover');
-  });
-  it('has a prefix of 645 and a length of 16', function() {
-    assert(detectNetwork('6450123012301230') === 'Discover');
-  });
-  it('has a prefix of 646 and a length of 16', function() {
-    assert(detectNetwork('6460123012301230') === 'Discover');
-  });
-  it('has a prefix of 647 and a length of 16', function() {
-    assert(detectNetwork('6470123012301230') === 'Discover');
-  });
-  it('has a prefix of 648 and a length of 16', function() {
-    assert(detectNetwork('6480123012301230') === 'Discover');
-  });
-  it('has a prefix of 649 and a length of 16', function() {
-    assert(detectNetwork('6490123012301230') === 'Discover');
-  });
-  it('has a prefix of 65 and a length of 16', function() {
-    assert(detectNetwork('6501230123012301') === 'Discover');
-  });
 
   it('has a prefix of 6011 and a length of 19', function() {
     assert(detectNetwork('6011012301230123012') === 'Discover');
   });
-  it('has a prefix of 644 and a length of 19', function() {
-    assert(detectNetwork('6440123012301230123') === 'Discover');
+
+  it('has a prefix of 65 and a length of 16', function() {
+    assert(detectNetwork('6501230123012301') === 'Discover');
   });
-  it('has a prefix of 645 and a length of 19', function() {
-    assert(detectNetwork('6450123012301230123') === 'Discover');
-  });
-  it('has a prefix of 646 and a length of 19', function() {
-    assert(detectNetwork('6460123012301230123') === 'Discover');
-  });
-  it('has a prefix of 647 and a length of 19', function() {
-    assert(detectNetwork('6470123012301230123') === 'Discover');
-  });
-  it('has a prefix of 648 and a length of 19', function() {
-    assert(detectNetwork('6480123012301230123') === 'Discover');
-  });
-  it('has a prefix of 649 and a length of 19', function() {
-    assert(detectNetwork('6490123012301230123') === 'Discover');
-  });
+  
   it('has a prefix of 65 and a length of 19', function() {
     assert(detectNetwork('6501230123012301230') === 'Discover');
   });
+
+  for (var prefix = 644; prefix <= 649; prefix++) {
+    (function(prefix) {
+      it('has a prefix of ' + prefix + ' and a length of 16', function() {
+        var sampleCardNumber = generateSampleCardNumber(prefix, 16);
+        assert(detectNetwork(sampleCardNumber.toString()) === 'Discover');
+      });
+
+      it('has a prefix of ' + prefix + ' and a length of 19', function() {
+        var sampleCardNumber = generateSampleCardNumber(prefix, 19);
+        assert(detectNetwork(sampleCardNumber.toString()) === 'Discover');
+      });
+    })(prefix);
+  }
 
 });
 
