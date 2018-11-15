@@ -17,11 +17,15 @@ var detectNetwork = function(cardNumber) {
   var cardLength = cardNumber.length;
   var firstDigit = Number(cardNumber.slice(0, 1));
   var firstTwoDigits = Number(cardNumber.slice(0, 2));
+  var firstThreeDigits = Number(cardNumber.slice(0, 3));
+  var firstFourDigits = Number(cardNumber.slice(0, 4));
 
   var isDinersClub = (cardLength === 14 && firstTwoDigits === 38 || firstTwoDigits === 39);
   var isAmericanExpress = (cardLength === 15 && firstTwoDigits === 34 || firstTwoDigits === 37);
   var isVisa = ((cardLength === 13 || cardLength === 16 || cardLength === 19) && firstDigit === 4);
   var isMasterCard = (cardLength === 16 && firstTwoDigits >= 51 && firstTwoDigits <= 55);
+  var isDiscover = (cardLength === 16 || cardLength === 19) &&
+                   (firstFourDigits === 6011 || (firstThreeDigits >= 644 && firstThreeDigits <= 649) || firstTwoDigits === 65);
 
   if (isDinersClub) {
     return 'Diner\'s Club';
@@ -31,5 +35,7 @@ var detectNetwork = function(cardNumber) {
     return 'Visa';
   } else if (isMasterCard) {
     return 'MasterCard';
+  } else if (isDiscover) {
+    return 'Discover';
   }
 };

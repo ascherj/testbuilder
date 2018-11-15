@@ -146,8 +146,58 @@ describe('MasterCard', function() {
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16');
-  it('has a prefix of 6011 and a length of 19');
+  var assert = chai.assert;
+
+  it('has a prefix of 6011 and a length of 16', function() {
+    assert(detectNetwork('6011012301230123') === 'Discover');
+  });
+  it('has a prefix of 644 and a length of 16', function() {
+    assert(detectNetwork('6440123012301230') === 'Discover');
+  });
+  it('has a prefix of 645 and a length of 16', function() {
+    assert(detectNetwork('6450123012301230') === 'Discover');
+  });
+  it('has a prefix of 646 and a length of 16', function() {
+    assert(detectNetwork('6460123012301230') === 'Discover');
+  });
+  it('has a prefix of 647 and a length of 16', function() {
+    assert(detectNetwork('6470123012301230') === 'Discover');
+  });
+  it('has a prefix of 648 and a length of 16', function() {
+    assert(detectNetwork('6480123012301230') === 'Discover');
+  });
+  it('has a prefix of 649 and a length of 16', function() {
+    assert(detectNetwork('6490123012301230') === 'Discover');
+  });
+  it('has a prefix of 65 and a length of 16', function() {
+    assert(detectNetwork('6501230123012301') === 'Discover');
+  });
+
+  it('has a prefix of 6011 and a length of 19', function() {
+    assert(detectNetwork('6011012301230123012') === 'Discover');
+  });
+  it('has a prefix of 644 and a length of 19', function() {
+    assert(detectNetwork('6440123012301230123') === 'Discover');
+  });
+  it('has a prefix of 645 and a length of 19', function() {
+    assert(detectNetwork('6450123012301230123') === 'Discover');
+  });
+  it('has a prefix of 646 and a length of 19', function() {
+    assert(detectNetwork('6460123012301230123') === 'Discover');
+  });
+  it('has a prefix of 647 and a length of 19', function() {
+    assert(detectNetwork('6470123012301230123') === 'Discover');
+  });
+  it('has a prefix of 648 and a length of 19', function() {
+    assert(detectNetwork('6480123012301230123') === 'Discover');
+  });
+  it('has a prefix of 649 and a length of 19', function() {
+    assert(detectNetwork('6490123012301230123') === 'Discover');
+  });
+  it('has a prefix of 65 and a length of 19', function() {
+    assert(detectNetwork('6501230123012301230') === 'Discover');
+  });
+
 });
 
 describe('Maestro', function() {
