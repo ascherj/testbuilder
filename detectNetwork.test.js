@@ -155,34 +155,34 @@ describe('MasterCard', function() {
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  var assert = chai.assert;
+  var expect = chai.expect;
 
   it('has a prefix of 6011 and a length of 16', function() {
-    assert(detectNetwork('6011012301230123') === 'Discover');
+    expect(detectNetwork('6011012301230123')).to.equal('Discover');
   });
 
   it('has a prefix of 6011 and a length of 19', function() {
-    assert(detectNetwork('6011012301230123012') === 'Discover');
+    expect(detectNetwork('6011012301230123012')).to.equal('Discover');
   });
 
   it('has a prefix of 65 and a length of 16', function() {
-    assert(detectNetwork('6501230123012301') === 'Discover');
+    expect(detectNetwork('6501230123012301')).to.equal('Discover');
   });
   
   it('has a prefix of 65 and a length of 19', function() {
-    assert(detectNetwork('6501230123012301230') === 'Discover');
+    expect(detectNetwork('6501230123012301230')).to.equal('Discover');
   });
 
   for (var prefix = 644; prefix <= 649; prefix++) {
     (function(prefix) {
       it('has a prefix of ' + prefix + ' and a length of 16', function() {
         var sampleCardNumber = generateSampleCardNumber(prefix, 16);
-        assert(detectNetwork(sampleCardNumber.toString()) === 'Discover');
+        expect(detectNetwork(sampleCardNumber.toString())).to.equal('Discover');
       });
 
       it('has a prefix of ' + prefix + ' and a length of 19', function() {
         var sampleCardNumber = generateSampleCardNumber(prefix, 19);
-        assert(detectNetwork(sampleCardNumber.toString()) === 'Discover');
+        expect(detectNetwork(sampleCardNumber.toString())).to.equal('Discover');
       });
     })(prefix);
   }
