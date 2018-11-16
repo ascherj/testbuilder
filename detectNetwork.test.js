@@ -214,28 +214,39 @@ describe('Maestro', function() {
 describe('China UnionPay', function() {
   var expect = chai.expect;
 
+  var testChinaUnionPay = function(prefix, length) {
+    it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+      expect(detectNetwork(generateSampleCardNumber(prefix, length))).to.equal('China UnionPay');
+    });
+  };
+
   for (var length = 16; length <= 19; length++) {
     (function(length) {
-
-      var testChinaUnionPay = function(prefix) {
-          it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
-            expect(detectNetwork(generateSampleCardNumber(prefix, length))).to.equal('China UnionPay');
-          });
-        };
-
       for (var prefix = 622126; prefix <= 622925; prefix++) {
-        testChinaUnionPay(prefix);
+        testChinaUnionPay(prefix, length);
       }
-
       for (var prefix = 624; prefix <= 626; prefix++) {
-        testChinaUnionPay(prefix);
+        testChinaUnionPay(prefix, length);
       }
-
       for (var prefix = 6282; prefix <= 6288; prefix++) {
-        testChinaUnionPay(prefix);
+        testChinaUnionPay(prefix, length);
       }
     })(length);
   }
+
+  // var lengths = [16, 17, 18, 19];
+  // lengths.forEach(function(length) {
+  //   for (var prefix = 622126; prefix <= 622925; prefix++) {
+  //     testChinaUnionPay(prefix, length);
+  //   }
+  //   for (var prefix = 624; prefix <= 626; prefix++) {
+  //     testChinaUnionPay(prefix, length);
+  //   }
+  //   for (var prefix = 6282; prefix <= 6288; prefix++) {
+  //     testChinaUnionPay(prefix, length);
+  //   }
+  // });
+
 });
 describe('Switch', function() {
   var expect = chai.expect;
