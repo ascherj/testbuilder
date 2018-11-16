@@ -19,6 +19,7 @@ var detectNetwork = function(cardNumber) {
   var firstTwoDigits = Number(cardNumber.slice(0, 2));
   var firstThreeDigits = Number(cardNumber.slice(0, 3));
   var firstFourDigits = Number(cardNumber.slice(0, 4));
+  var firstSixDigits = Number(cardNumber.slice(0, 6));
 
   var isDinersClub = (cardLength === 14 && (firstTwoDigits === 38 || firstTwoDigits === 39));
   var isAmericanExpress = (cardLength === 15 && (firstTwoDigits === 34 || firstTwoDigits === 37));
@@ -28,6 +29,10 @@ var detectNetwork = function(cardNumber) {
                    (firstFourDigits === 6011 || (firstThreeDigits >= 644 && firstThreeDigits <= 649) || firstTwoDigits === 65);
   var isMaestro = (cardLength >= 12 && cardLength <= 19) &&
                   (firstFourDigits === 5018 || firstFourDigits === 5020 || firstFourDigits === 5038 || firstFourDigits === 6304);
+  var isChinaUnionPay = (cardLength >= 16 && cardLength <= 19) &&
+                        (firstSixDigits >= 622126 && firstSixDigits <= 622925) ||
+                        (firstThreeDigits >= 624 && firstThreeDigits <= 626) ||
+                        (firstFourDigits >= 6282 && firstFourDigits <= 6288);
 
   if (isDinersClub) {
     return 'Diner\'s Club';
@@ -41,5 +46,7 @@ var detectNetwork = function(cardNumber) {
     return 'Discover';
   } else if (isMaestro) {
     return 'Maestro';
+  } else if (isChinaUnionPay) {
+    return 'China UnionPay';
   }
 };
