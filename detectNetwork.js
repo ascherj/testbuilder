@@ -33,11 +33,17 @@ var detectNetwork = function(cardNumber) {
                         (firstSixDigits >= 622126 && firstSixDigits <= 622925) ||
                         (firstThreeDigits >= 624 && firstThreeDigits <= 626) ||
                         (firstFourDigits >= 6282 && firstFourDigits <= 6288);
+  var isSwitch = (cardLength === 16 || cardLength === 18 || cardLength === 19) &&
+                 (firstFourDigits === 4903 || firstFourDigits === 4905 || firstFourDigits === 4911 || firstFourDigits === 4936) ||
+                 (firstSixDigits === 564182 || firstSixDigits === 633110) ||
+                 (firstFourDigits === 6333 || firstFourDigits === 6759);
 
   if (isDinersClub) {
     return 'Diner\'s Club';
   } else if (isAmericanExpress) {
     return 'American Express';
+  } else if(isSwitch) {
+    return 'Switch';
   } else if (isVisa) {
     return 'Visa';
   } else if (isMasterCard) {
