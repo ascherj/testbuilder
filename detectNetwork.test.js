@@ -237,4 +237,17 @@ describe('China UnionPay', function() {
     })(length);
   }
 });
-describe('should support Switch');
+describe('Switch', function() {
+  var expect = chai.expect;
+
+  var prefixes = [4903, 4905, 4911, 4936, 564182, 633110, 6333, 6759];
+  var lengths = [16, 18, 19];
+
+  prefixes.forEach(function(prefix) {
+    lengths.forEach(function(length) {
+      it('has a prefix of ' + prefix + ' and a length of ' + length, function() {
+        expect(detectNetwork(generateSampleCardNumber(prefix, length))).to.equal('Switch');
+      });
+    });
+  });
+});
